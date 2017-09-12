@@ -1,0 +1,76 @@
+#include <iostream>
+
+typedef struct nodo {
+	public:
+		int dato;
+		nodo *otronodo;
+		nodo (int d) {
+			dato = d;
+			otronodo = NULL;
+		}
+} tipoNodo;
+class MyList {
+	public:
+		nodo first = NULL;
+		nodo last = NULL;
+		nodo pointer = NULL;
+		MyList(int d) {
+			nodo n = nodo(d);
+			first = n;
+			last = n;
+			n.otronodo = NULL;
+		}
+		bool isEmpty() {
+			return &first == NULL;
+		}
+		void insertFirst(int d) {
+			nodo n = nodo(d);
+			if (isEmpty()) {
+				first = last = n;
+				n.otronodo = NULL;
+			} else {
+				n.otronodo = &first;
+				first = n;
+			}
+		}
+		void insertLast(int d) {
+			nodo n = nodo(d);
+			if (isEmpty()) {
+				first = last = n;
+				n.otronodo = NULL;
+			}
+			else {
+				last.otronodo = &n;
+				last = n;
+			}
+		}
+		void deleteFirst(){
+			if (!isEmpty()) {
+				if (first.otronodo == NULL) {
+					first = last = NULL;
+				} else {
+					first = first -> first.otronodo;
+				}
+			}
+		}
+		void deleteLast() {
+			if (!isEmpty()) {
+				if (first.otronodo == NULL) {
+					first = last = NULL;
+				} else {
+					pointer = first;
+					while (pointer.otronodo != &last) {
+						pointer = pointer -> pointer.otronodo;
+					}
+					last = pointer;
+					last.otronodo = NULL;
+					pointer = NULL;
+				}
+			}
+		}
+};
+typedef tipoNodo *pNodo;
+typedef tipoNodo *Lista;
+int main() {
+
+}
